@@ -1,0 +1,25 @@
+{
+  "name": "package-release",
+  "version": "1.0.0",
+  "description": "A command-line tool that helps you to generate changelogs from git-log and update the version of package.json.",
+  "bin": "index.js",
+  "scripts": {
+    "test": "echo \"No test\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hpyer/package-release.git"
+  },
+  "keywords": [
+    "release",
+    "changelog",
+    "git",
+    "cli",
+    "package"
+  ],
+  "author": "Hpyer",
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.2.6"
+  }
+}
