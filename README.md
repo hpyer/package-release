@@ -1,6 +1,6 @@
 # package-release
 
-[![Build Status](https://app.travis-ci.com/hpyer/package-release.svg?branch=main)](https://app.travis-ci.com/hpyer/package-release)
+[![Build Status](https://app.travis-ci.com/hpyer/package-release.svg?branch=master)](https://app.travis-ci.com/hpyer/package-release)
 
 A command-line tool that helps you to generate changelogs from git-log, update the version of package.json and auto commit with tag.
 
@@ -28,7 +28,17 @@ npx package-release -v 2.3.4
 npx package-release -p
 ```
 
-## Custom
+## Options
+
+All options are optional.
+
+- `-v`, `--version`: The version you want release.
+- `-t`, `--type`: Which part of version will be upgraded, options: major | minor | patch, default: patch. You also can set `alpha`, `beta` and so on, the version will be upgraded like: `1.0.0-alpha.1`. **Note: This option will be ignored when `version` has been set.**
+- `-p`, `--push`: It will auto push changes to git remote when you set this option. default: false.
+- `-u`, `--upgrade-only`: It will disable commit when you set this option. default: false.
+- `-h`, `--help`: For help.
+
+## Custom configuration
 
 You can add `package-release` section into `package.json` to custom head-line and git commit types.
 
