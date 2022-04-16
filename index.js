@@ -288,8 +288,6 @@ const main = async function (args) {
     process.exit(0);
   }
 
-  console.log(args);
-
   await main(args);
 })()
 .catch(e => {
