@@ -190,12 +190,9 @@ const calNextVersion = function(version, args) {
         }
       }
       lastVersions[2] = parseInt(lastPart) + '-' + args.type + '.' + (v + 1);
-      for (let i = lastVersions.length - 1; i > 2; i--) {
-        lastVersions.pop();
-      }
   }
 
-  return lastVersions.join('.');
+  return lastVersions.slice(0, 3).join('.');
 };
 
 /**
