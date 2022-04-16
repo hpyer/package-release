@@ -157,7 +157,7 @@ const commitNewRelease = async function (version, changelogs) {
 /**
  * Calculate next version
  * @param {string} version
- * @param {{version: string, type: string, help: boolean, push: boolean}} args
+ * @param {{version: string, type: string, help: boolean, push: boolean, 'upgrade-only': boolean}} args
  * @returns {string}
  */
 const calNextVersion = function(version, args) {
@@ -200,7 +200,7 @@ const calNextVersion = function(version, args) {
 
 /**
  * Main function
- * @param {{version: string, type: string, help: boolean, push: boolean}} args
+ * @param {{version: string, type: string, help: boolean, push: boolean, 'upgrade-only': boolean}} args
  */
 const main = async function (args) {
   let Package;
@@ -243,7 +243,9 @@ const main = async function (args) {
     flag: 'w+',
   });
 
-  await commitNewRelease(nextVersion, changelogs);
+  if (!args['upgrade-only']) {
+    await commitNewRelease(nextVersion, changelogs);
+  }
 
   if (args.push) {
     await runCmd('git', ['push', '--follow-tags'])
@@ -264,12 +266,14 @@ const main = async function (args) {
       t: 'type',
       v: 'version',
       p: 'push',
+      u: 'upgrade-only',
     },
     default: {
       h: false,
       t: 'patch',
       v: '',
       p: false,
+      u: false,
     }
   });
 
@@ -282,9 +286,12 @@ const main = async function (args) {
     console.log('  \t\t\tYou also can set `alpha`, `beta` and so on, the version will be upgraded like: `1.0.0-alpha.1`.');
     console.log('  \t\t\tNote: This option will be ignored when the `version` has been set.');
     console.log('  -p\t--push\t\tIt will auto push changes to git remote when you set this option. default: false');
+    console.log('  -u\t--upgrade-only\tIt will disable commit when you set this option. default: false');
     console.log('  -h\t--help');
     process.exit(0);
   }
+
+  console.log(args);
 
   await main(args);
 })()
