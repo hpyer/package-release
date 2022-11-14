@@ -1,12 +1,18 @@
 # CHANGELOG
 
 
+## v1.0.3 (2022-11-15)
+
+- Fix: 修复部分情况下提交信息提取遗失的问题
+
+## v1.0.2 (2022-04-16)
+
 ## v1.0.1 (2022-04-16)
 
-- Feat: Add -u, --upgrade-only option
+- Feat: Add -u--upgrade-only option
 
 - Fix: Make sure version has three parts only
 
 - Docs: Add options section.
 
-## v1.0.0, origin/master (2022-04-16)
+## v1.0.0 (2022-04-16)
