@@ -50,7 +50,7 @@ const extractReleases = async function (version) {
   let releases = [];
 
   for (let i = 0; i < res.length; i++) {
-    let line = res[i].replace(/\(HEAD \-> [\w\-\/]+\)\s/i, '').replace(/HEAD \-> [\w\-\/]+,?/i, '');
+    let line = res[i].replace(/\(HEAD \-> [\w\-\/\.]+\)\s/i, '').replace(/HEAD \-> [\w\-\/\.]+,?\s?/i, '').replace(/[\w\-\/\.]+\/[\w\-\/\.]+/gi, '').replace(/,\s?/gi, '').replace(/\(\)/gi, '').replace(/\s{1,}/gi, ' ');
     let matched = line.match(/(\d{4}\-\d{2}\-\d{2})\s(\(.*(tag:\s*(v\d+\.\d+\.\d+))[^\)]*\)\s)?([^\(]+)(\(.+\))?:\s*(.+)/i);
     if (!matched) continue;
     let date = matched[1];
