@@ -2,6 +2,7 @@
 
 const ChildProcess = require('child_process');
 const Fs = require('fs');
+const Os = require('os');
 const Minimist = require('minimist');
 
 const CWD = process.cwd();
@@ -118,14 +119,14 @@ const writeChangelogFile = function (releases, types, header) {
     }
   });
   content.push('');
-  content = content.join('\n');
+  content = content.join(Os.EOL);
 
   Fs.writeFileSync(CWD + '/CHANGELOG.md', content, {
     encoding: 'utf-8',
     flag: 'w+',
   });
 
-  return changelogs.join('\n');
+  return changelogs.join(Os.EOL);
 }
 
 /**
@@ -142,7 +143,7 @@ const commitNewRelease = async function (version, changelogs) {
   });
 
   console.log('(Git) Commit release');
-  await runCmd('git', ['commit', '-m', `chore(release): v${version}\n\n${changelogs}`])
+  await runCmd('git', ['commit', '-m', `chore(release): v${version}${Os.EOL}${Os.EOL}${changelogs}`])
   .catch(e => {
     throw new Error('commitNewRelease.commit: ' + e);
   });
@@ -235,7 +236,7 @@ const main = async function (args) {
 
   console.log('Write package.json');
   Package.version = nextVersion;
-  Fs.writeFileSync(CWD + '/package.json', JSON.stringify(Package, null, 2) + '\n', {
+  Fs.writeFileSync(CWD + '/package.json', JSON.stringify(Package, null, 2).replaceAll('\n', Os.EOL) + Os.EOL, {
     encoding: 'utf-8',
     flag: 'w+',
   });
@@ -245,14 +246,14 @@ const main = async function (args) {
   }
 
   if (args.push) {
-    await runCmd('git', ['push', '--follow-tags'])
+    await runCmd('git', ['push', '&&', 'git', 'push', '--tags'])
     .catch(e => {
       throw new Error('push: ' + e);
     });
     console.log(`v${nextVersion} is released and auto pushed to remote`);
   }
   else {
-    console.log(`v${nextVersion} is released, you can run \`git push --follow-tags\` to push release with tag.`);
+    console.log(`v${nextVersion} is released, you can run \`git push && git push --tags\` to push release with tag.`);
   }
 };
 
