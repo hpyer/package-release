@@ -1,7 +1,5 @@
 # package-release
 
-[![Build Status](https://app.travis-ci.com/hpyer/package-release.svg?branch=master)](https://app.travis-ci.com/hpyer/package-release)
-
 A command-line tool that helps you to generate changelogs from git-log, update the version of package.json and auto commit with tag.
 
 ## Install

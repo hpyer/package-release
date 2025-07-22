@@ -6,6 +6,7 @@ yarn.lock
 yarn-error.log
 npm-debug.log
 .travis.yml
+.github/
 
 # Editor directories and files
 .idea
